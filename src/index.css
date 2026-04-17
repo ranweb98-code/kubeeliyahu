@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Anomalia Font Family */
+@font-face {
+  font-family: 'Anomalia';
+  src: url('/fonts/anomalia-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anomalia';
+  src: url('/fonts/anomalia-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anomalia';
+  src: url('/fonts/anomalia-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anomalia';
+  src: url('/fonts/anomalia-demibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anomalia';
+  src: url('/fonts/anomalia-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anomalia';
+  src: url('/fonts/anomalia-ultrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Anomalia Hollow';
+  src: url('/fonts/anomalia-hollow.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* קובה אליהו - Warm Traditional Food Design System */
+
+@layer base {
+  :root {
+    --background: 40 33% 96%;
+    --foreground: 150 30% 15%;
+    
+    --primary: 160 45% 22%;
+    --primary-foreground: 40 33% 96%;
+    --primary-hover: 160 45% 28%;
+    
+    --accent: 42 70% 55%;
+    --accent-foreground: 150 30% 15%;
+    
+    --destructive: 350 65% 45%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --secondary: 40 25% 90%;
+    --secondary-foreground: 150 30% 20%;
+    
+    --muted: 40 20% 90%;
+    --muted-foreground: 150 15% 40%;
+    
+    --border: 40 20% 85%;
+    --input: 40 20% 85%;
+    --ring: 160 45% 22%;
+    
+    --card: 40 30% 98%;
+    --card-foreground: 150 30% 15%;
+    
+    --popover: 40 30% 98%;
+    --popover-foreground: 150 30% 15%;
+    
+    --nav-background: 40 30% 98%;
+    --nav-foreground: 150 30% 15%;
+    --nav-hover: 160 45% 22%;
+    
+    --status-bar: 160 45% 18%;
+    --status-bar-foreground: 40 33% 96%;
+
+    --radius: 0.5rem;
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 40 25% 95%;
+    --sidebar-foreground: 150 30% 20%;
+    --sidebar-primary: 160 45% 22%;
+    --sidebar-primary-foreground: 40 33% 96%;
+    --sidebar-accent: 40 25% 90%;
+    --sidebar-accent-foreground: 150 30% 15%;
+    --sidebar-border: 40 20% 85%;
+    --sidebar-ring: 160 45% 22%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Anomalia', 'Heebo', sans-serif;
+    font-weight: 400;
+    direction: rtl;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Anomalia', 'Frank Ruhl Libre', serif;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-weight: 800;
+  }
+}
+
+@layer utilities {
+  .font-anomalia-hollow {
+    font-family: 'Anomalia Hollow', serif;
+  }
+
+  .story-link {
+    @apply relative;
+  }
+  .story-link::after {
+    content: '';
+    @apply absolute w-full scale-x-0 h-0.5 bottom-0 left-0 bg-current origin-bottom-right transition-transform duration-300;
+  }
+  .story-link:hover::after {
+    @apply scale-x-100 origin-bottom-left;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
+
+  .rotating-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .rotating-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--angle, 0deg),
+      transparent 0deg,
+      hsl(var(--primary)) 90deg,
+      hsl(var(--accent)) 180deg,
+      hsl(var(--primary)) 270deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    animation: border-spin 3s linear infinite;
+    animation-play-state: paused;
+    z-index: -1;
+  }
+  .rotating-border:hover::before {
+    opacity: 1;
+    animation-play-state: running;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-spin {
+  to {
+    --angle: 360deg;
+  }
+}
