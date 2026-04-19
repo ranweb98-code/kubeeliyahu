@@ -125,15 +125,15 @@ const Navigation = () => {
           >
             <Instagram className="w-5 h-5" />
           </a>
-          <a
-            href="tel:0509766643"
+          <Link
+            to="/contact"
             className={`p-2 transition-colors hover-scale ${
               showSolid ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
             }`}
-            aria-label={lang === "he" ? "טלפון" : "Phone"}
+            aria-label={lang === "he" ? "צור קשר" : "Contact"}
           >
             <Phone className="w-5 h-5" />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -152,15 +152,11 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4 border-t border-border animate-fade-in flex items-center gap-4" style={{ animationDelay: "320ms", animationFillMode: "both" }}>
-              <a href="tel:0509766643" className="flex items-center gap-2 text-primary font-medium">
+            <div className="pt-4 border-t border-border animate-fade-in" style={{ animationDelay: "320ms", animationFillMode: "both" }}>
+              <Link to="/contact" className="inline-flex items-center gap-2 text-primary font-medium" onClick={() => setIsMobileMenuOpen(false)}>
                 <Phone className="w-4 h-4" />
-                <span dir="ltr">050-976-6643</span>
-              </a>
-              <a href="tel:052092863" className="flex items-center gap-2 text-primary font-medium">
-                <Phone className="w-4 h-4" />
-                <span dir="ltr">052-092-863</span>
-              </a>
+                {t.nav.contact}
+              </Link>
             </div>
           </div>
         </div>

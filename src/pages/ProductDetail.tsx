@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
-import { Phone, ArrowRight, ArrowLeft, Clock, ChefHat, Flame } from "lucide-react";
+import { MapPin, ArrowRight, ArrowLeft, Clock, ChefHat, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import packSelek from "@/assets/pack-kubbeh-selek.png";
@@ -182,12 +182,12 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-4">
-                  <a href="tel:0509766643">
+                  <Link to="/store-locations">
                     <Button className="bg-primary text-primary-foreground hover:bg-primary-hover rounded-full px-6 gap-2">
-                      <Phone className="w-4 h-4" />
-                      {t.productDetail.orderAt} 050-976-6643
+                      <MapPin className="w-4 h-4" />
+                      {t.productDetail.orderAt}
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -253,12 +253,12 @@ const ProductDetail = () => {
                 {t.productDetail.wantToOrder}
               </h2>
               <p className="text-primary-foreground/80 mb-6">{t.productDetail.callToOrder}</p>
-              <a href="tel:0509766643">
+              <Link to="/store-locations">
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 py-6 text-base font-medium gap-2">
-                  <Phone className="w-5 h-5" />
-                  050-976-6643
+                  <MapPin className="w-5 h-5" />
+                  {t.productDetail.findStoreCta}
                 </Button>
-              </a>
+              </Link>
             </div>
           </AnimateOnScroll>
         </div>

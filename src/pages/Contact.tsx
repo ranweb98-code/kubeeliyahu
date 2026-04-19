@@ -1,6 +1,6 @@
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import { Phone, Instagram, Facebook, Clock, MapPin, Mail, Send } from "lucide-react";
+import { Instagram, Facebook, Clock, MapPin, Mail, Send, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,15 +31,50 @@ const Contact = () => {
     }
 
     setIsSending(true);
-    const subject = encodeURIComponent(`פנייה חדשה מ-${name.trim()}`);
-    const body = encodeURIComponent(`שם: ${name.trim()}\nטלפון: ${phone.trim()}\n\nהודעה:\n${message.trim()}`);
-    window.open(`mailto:kube8eliyahu@gmail.com?subject=${subject}&body=${body}`, "_blank");
-    
-    toast({ title: t.contact.thankYou, description: t.contact.thankYouDesc });
-    setName("");
-    setPhone("");
-    setMessage("");
-    setIsSending(false);
+    const endpoint = import.meta.env.VITE_CONTACT_API_URL?.trim() || "/api/contact";
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !data.ok) {
+        if (data.error === "missing_resend_api_key") {
+          toast({
+            title: t.contact.errorTitle,
+            description: t.contact.errorServerConfig,
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: t.contact.errorTitle,
+            description: t.contact.errorSendFailed,
+            variant: "destructive",
+          });
+        }
+        return;
+      }
+
+      toast({ title: t.contact.thankYou, description: t.contact.thankYouDesc });
+      setName("");
+      setPhone("");
+      setMessage("");
+    } catch {
+      toast({
+        title: t.contact.errorTitle,
+        description: t.contact.errorNetwork,
+        variant: "destructive",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -57,37 +92,36 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-card rounded-xl p-8 text-center shadow-sm">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">{t.contact.phone}</h3>
-              <p className="text-muted-foreground text-sm mb-4">{t.contact.phoneSubtitle}</p>
-              <div className="space-y-2">
-                <a href="tel:0509766643">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary-hover rounded-full px-6 gap-2 w-full">
-                    <Phone className="w-4 h-4" />
-                    <span dir="ltr">050-976-6643</span>
-                  </Button>
-                </a>
-                <a href="tel:052092863">
-                  <Button variant="outline" className="rounded-full px-6 gap-2 w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                    <Phone className="w-4 h-4" />
-                    <span dir="ltr">052-092-863</span>
-                  </Button>
-                </a>
-              </div>
+          <div
+            id="itamar-business"
+            className="mb-8 rounded-2xl border-2 border-primary bg-primary/5 p-8 text-center shadow-sm md:p-10"
+          >
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/15">
+              <Building2 className="h-8 w-8 text-primary" />
             </div>
+            <h2 className="text-2xl font-extrabold text-foreground md:text-3xl">{t.contact.itamarBusinessTitle}</h2>
+            <p className="mt-2 text-sm text-muted-foreground md:text-base">{t.contact.itamarBusinessSubtitle}</p>
+            <a href="tel:0509766643" className="mt-6 inline-block">
+              <span className="sr-only">{t.contact.itamarBusinessTitle}</span>
+              <span
+                className="block rounded-2xl bg-primary px-8 py-4 text-2xl font-bold tracking-wide text-primary-foreground shadow-md transition-colors hover:bg-primary-hover md:text-3xl"
+                dir="ltr"
+              >
+                050-976-6643
+              </span>
+            </a>
+            <p className="mt-4 text-xs font-medium text-muted-foreground md:text-sm">{t.contact.itamarCallHint}</p>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-card rounded-xl p-8 text-center shadow-sm">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-foreground">{t.contact.email}</h3>
-              <p className="text-muted-foreground text-sm mb-4">{t.contact.emailSubtitle}</p>
+              <h3 className="text-xl font-semibold mb-2 text-foreground">{t.contact.generalInquiriesTitle}</h3>
+              <p className="text-muted-foreground text-sm mb-4">{t.contact.generalInquiriesSubtitle}</p>
               <a href="mailto:kube8eliyahu@gmail.com">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary-hover rounded-full px-6 gap-2">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary-hover rounded-full px-6 gap-2 w-full">
                   <Mail className="w-4 h-4" />
                   kube8eliyahu@gmail.com
                 </Button>
@@ -142,6 +176,7 @@ const Contact = () => {
               <Send className="w-10 h-10 text-primary mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-foreground mb-2">{t.contact.formTitle}</h2>
               <p className="text-muted-foreground text-sm">{t.contact.formSubtitle}</p>
+              <p className="mt-3 text-xs text-muted-foreground leading-relaxed md:text-sm">{t.contact.formHowItWorks}</p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-5 max-w-lg mx-auto">
               <div>

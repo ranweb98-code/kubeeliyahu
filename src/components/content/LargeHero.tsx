@@ -1,6 +1,7 @@
 import heroImage from "@/assets/kubbeh-1.jpg";
-import { Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const LargeHero = () => {
@@ -28,12 +29,12 @@ const LargeHero = () => {
             {t.hero.description}
           </p>
           <div className="animate-hero-slide-up" style={{ animationDelay: "0.9s" }}>
-            <a href="https://wa.me/972509766643" target="_blank" rel="noopener noreferrer">
+            <Link to="/store-locations">
               <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-10 py-6 text-lg font-semibold gap-2 shadow-lg">
-                <Phone className="w-5 h-5" />
+                <MapPin className="w-5 h-5" />
                 {t.hero.orderNow}
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

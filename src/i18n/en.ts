@@ -1,6 +1,10 @@
 import type { he } from "./he";
 
 export const en: typeof he = {
+  floatingPurchasePoints: {
+    label: "Store locations",
+    ariaLabel: "Go to store locations",
+  },
   nav: {
     home: "Home",
     products: "Products",
@@ -12,7 +16,7 @@ export const en: typeof he = {
     title: "Kube Eliyahu",
     subtitle: "Grandma's Flavors",
     description: "Traditional homemade kubbeh, crafted with love from generation to generation",
-    orderNow: "Order Now",
+    orderNow: "Where to buy",
   },
   whyChoose: {
     title: "Why Choose Us?",
@@ -20,13 +24,13 @@ export const en: typeof he = {
     features: [
       { title: "Grandma's Recipe", description: "A traditional recipe passed down from generation to generation" },
       { title: "Natural Ingredients", description: "Premium fresh ingredients with no preservatives" },
-      { title: "Made with Love", description: "Every kubbeh is handmade with attention to every detail" },
+      { title: "Made with Love", description: "Every kubbeh is prepared in our kitchen with attention to every detail" },
       { title: "Personal Service", description: "Professional guidance and warm family-like service" },
     ],
   },
   fiftyFifty: {
     title: "Our Recommendations",
-    subtitle: "Homemade kubbeh with rich filling, crafted by hand in the traditional way",
+    subtitle: "Homemade kubbeh with rich filling, made the traditional way in our kitchen",
     detailsAndRecipe: "Details & Recipe",
     products: [
       { name: "Beet Kubbeh", description: "Kubbeh for soup with fresh beef filling, served with rich red beet" },
@@ -82,7 +86,7 @@ export const en: typeof he = {
     grandmaAlt: "Grandma illustration",
     section1Title: "Grandma's Recipe",
     section1P1: "Kube Eliyahu was born from a genuine love for the traditional home kitchen. Our recipes are passed down from generation to generation, with the same authentic taste remembered from grandma's house.",
-    section1P2: "Every kubbeh is handmade with fresh, high-quality ingredients, without preservatives or unnecessary additives.",
+    section1P2: "Every kubbeh is prepared in our kitchen with fresh, high-quality ingredients, without preservatives or unnecessary additives.",
     section2Title: "Uncompromising Quality",
     section2P: "We maintain strict kosher standards, top-tier ingredients, and a meticulous preparation process. Every dish undergoes quality control before leaving our kitchen.",
     qualityLabels: [
@@ -93,9 +97,12 @@ export const en: typeof he = {
   },
   contact: {
     title: "Contact Us",
-    subtitle: "We'd love to hear from you and help with any question or order",
-    phone: "Phone",
-    phoneSubtitle: "For orders and inquiries",
+    subtitle: "We'd love to hear from you and help with any question",
+    itamarBusinessTitle: "Business & partnerships",
+    itamarBusinessSubtitle: "Itamar — wholesale, partnerships, and business inquiries only",
+    itamarCallHint: "Not for retail customer support",
+    generalInquiriesTitle: "General inquiries",
+    generalInquiriesSubtitle: "Questions, feedback, and suggestions — by email or the form below",
     email: "Email",
     emailSubtitle: "Write to us and we'll get back to you",
     instagramTitle: "Instagram",
@@ -106,7 +113,8 @@ export const en: typeof he = {
     storeLocationsSubtitle: "Find the nearest point of sale",
     allStoreLocations: "All Store Locations",
     formTitle: "Send Us a Message",
-    formSubtitle: "We'll get back to you as soon as possible",
+    formSubtitle: "General inquiries — we'll get back to you as soon as possible",
+    formHowItWorks: "Your message is sent directly from the site — no need to open an email app.",
     nameLabel: "Full Name",
     namePlaceholder: "Enter your name",
     phoneLabel: "Phone",
@@ -118,7 +126,10 @@ export const en: typeof he = {
     errorFillAll: "Please fill in all fields",
     errorInvalidPhone: "Invalid phone number",
     thankYou: "Thank you!",
-    thankYouDesc: "Your message has been sent successfully. We'll get back to you soon.",
+    thankYouDesc: "We received your message and will get back to you soon.",
+    errorSendFailed: "We couldn't send your message. Please try again later.",
+    errorServerConfig: "Email sending is not configured on the server. Add the Resend API key (see .env.example).",
+    errorNetwork: "Network error — check your connection and try again.",
     hoursTitle: "Business Hours",
     sunToThu: "Sunday - Thursday",
     friday: "Friday",
@@ -128,8 +139,9 @@ export const en: typeof he = {
   products: {
     title: "Our Products",
     subtitle: "All products are kosher certified, made from premium ingredients",
-    wantToOrder: "Want to Order?",
-    callUs: "Call us to order products",
+    wantToOrder: "Want to buy?",
+    callUs: "Find a store near you",
+    findStoreCta: "Store locations",
     items: [
       { name: "Kubbeh for Soup - Beef", subtitle: "Beet Kubbeh", description: "Kubbeh for soup with fresh beef filling, served with rich red beet. Net weight 800g." },
       { name: "Siska Kubbeh for Soup", subtitle: "Shredded meat", description: "Siska kubbeh for soup with shredded meat in traditional seasoning. Net weight 800g." },
@@ -141,7 +153,7 @@ export const en: typeof he = {
   productDetail: {
     notFound: "Product Not Found",
     backToProducts: "Back to Products",
-    orderAt: "Order:",
+    orderAt: "Store locations",
     cooking: "Cooking",
     recipe: "Recipe",
     ingredients: "Ingredients:",
@@ -150,8 +162,9 @@ export const en: typeof he = {
     nutritionPer100: "Nutritional info per 100g",
     allergens: "Allergens:",
     mayContain: "May contain:",
-    wantToOrder: "Want to Order?",
-    callToOrder: "Call us to order",
+    wantToOrder: "Want to buy?",
+    callToOrder: "Find a store near you",
+    findStoreCta: "Store locations",
   },
   storeLocations: {
     title: "Store Locations",

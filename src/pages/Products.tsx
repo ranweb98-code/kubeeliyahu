@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
-import { Phone } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/i18n/LanguageContext";
 import packSelek from "@/assets/pack-kubbeh-selek.png";
@@ -82,12 +82,12 @@ const Products = () => {
               <p className="text-primary-foreground/80 mb-6">
                 {t.products.callUs}
               </p>
-              <a href="tel:0509766643">
+              <Link to="/store-locations">
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-full px-8 py-6 text-base font-medium gap-2">
-                  <Phone className="w-5 h-5" />
-                  050-976-6643
+                  <MapPin className="w-5 h-5" />
+                  {t.products.findStoreCta}
                 </Button>
-              </a>
+              </Link>
             </div>
           </AnimateOnScroll>
         </div>

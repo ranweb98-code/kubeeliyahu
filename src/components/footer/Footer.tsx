@@ -42,14 +42,16 @@ const Footer = () => {
           <div className="text-center md:text-start">
             <h4 className="font-serif text-lg font-semibold mb-4">{t.footer.contactTitle}</h4>
             <div className="space-y-3 text-sm text-primary-foreground/80">
-              <a href="tel:0509766643" className="flex items-center gap-2 justify-center md:justify-start hover:text-primary-foreground transition-colors">
-                <Phone className="w-4 h-4 flex-shrink-0" />
-                <span dir="ltr">050-976-6643</span>
-              </a>
-              <a href="tel:052092863" className="flex items-center gap-2 justify-center md:justify-start hover:text-primary-foreground transition-colors">
-                <Phone className="w-4 h-4 flex-shrink-0" />
-                <span dir="ltr">052-092-863</span>
-              </a>
+              <div className="rounded-lg border border-primary-foreground/25 bg-primary-foreground/5 px-3 py-2 text-start">
+                <p className="text-xs font-semibold uppercase tracking-wide text-primary-foreground/90">
+                  {t.contact.itamarBusinessTitle}
+                </p>
+                <a href="tel:0509766643" className="mt-1 flex items-center gap-2 font-semibold hover:text-primary-foreground transition-colors">
+                  <Phone className="w-4 h-4 flex-shrink-0" />
+                  <span dir="ltr">050-976-6643</span>
+                </a>
+                <p className="mt-1 text-xs text-primary-foreground/70">{t.contact.itamarCallHint}</p>
+              </div>
               <a href="mailto:kube8eliyahu@gmail.com" className="flex items-center gap-2 justify-center md:justify-start hover:text-primary-foreground transition-colors">
                 <Mail className="w-4 h-4 flex-shrink-0" />
                 <span>kube8eliyahu@gmail.com</span>
