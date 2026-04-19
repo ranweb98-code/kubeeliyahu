@@ -14,13 +14,19 @@ function readRawBody(req: IncomingMessage): Promise<string> {
   });
 }
 
-/** Dev-only: same `/api/contact` as Vercel serverless in production */
+/** Dev-only: mirrors Vercel `/api/health` + `/api/contact` */
 function contactApiPlugin(): Plugin {
   return {
     name: "contact-api",
     configureServer(server) {
       server.middlewares.use((req: IncomingMessage, res: ServerResponse, next: () => void) => {
         const pathname = req.url?.split("?")[0] ?? "";
+        if (pathname === "/api/health" && req.method === "GET") {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ ok: true, route: "api/health" }));
+          return;
+        }
         if (pathname !== "/api/contact" || req.method !== "POST") {
           next();
           return;
