@@ -1,5 +1,4 @@
 import "dotenv/config";
-import { Resend } from "resend";
 
 export type ContactPayload = {
   name: string;
@@ -28,6 +27,45 @@ function assertContactPayload(body: unknown): ContactPayload {
   };
 }
 
+/** Uses Resend HTTP API directly — no `resend` npm package (avoids Vercel MODULE_NOT_FOUND). */
+async function sendViaResendApi(params: {
+  apiKey: string;
+  from: string;
+  to: string;
+  subject: string;
+  text: string;
+  html: string;
+}): Promise<void> {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${params.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: params.from,
+      to: [params.to],
+      subject: params.subject,
+      text: params.text,
+      html: params.html,
+    }),
+  });
+
+  if (res.ok) {
+    return;
+  }
+
+  const raw = await res.text();
+  let detail = raw;
+  try {
+    const errJson = JSON.parse(raw) as { message?: string };
+    detail = errJson.message ?? raw;
+  } catch {
+    /* keep raw body */
+  }
+  throw new Error(`resend_api_${res.status}: ${detail || res.statusText}`);
+}
+
 export async function sendContactEmail(rawBody: unknown): Promise<void> {
   const payload = assertContactPayload(rawBody);
 
@@ -38,8 +76,6 @@ export async function sendContactEmail(rawBody: unknown): Promise<void> {
 
   const to = process.env.CONTACT_TO_EMAIL ?? "kube8eliyahu@gmail.com";
   const from = process.env.RESEND_FROM ?? "Kube Eliyahu <onboarding@resend.dev>";
-
-  const resend = new Resend(apiKey);
 
   const subject = `פנייה מאתר — ${payload.name}`;
   const text = [
@@ -57,17 +93,14 @@ export async function sendContactEmail(rawBody: unknown): Promise<void> {
     <p>${escapeHtml(payload.message).replace(/\n/g, "<br/>")}</p>
   `;
 
-  const { error } = await resend.emails.send({
+  await sendViaResendApi({
+    apiKey,
     from,
-    to: [to],
+    to,
     subject,
     text,
     html,
   });
-
-  if (error) {
-    throw new Error(error.message || "resend_error");
-  }
 }
 
 function escapeHtml(s: string): string {
