@@ -2,7 +2,7 @@ import AnimateOnScroll from "@/components/AnimateOnScroll";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MapPin, Sparkles } from "lucide-react";
+import { MapPin, Soup } from "lucide-react";
 
 const VideoTeaser = () => {
   const { dir, t } = useLanguage();
@@ -20,7 +20,7 @@ const VideoTeaser = () => {
         <AnimateOnScroll>
           <div className="mb-10 text-center md:mb-14">
             <p className="mb-3 inline-flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-widest text-primary">
-              <Sparkles className="h-4 w-4 text-accent" aria-hidden />
+              <Soup className="h-4 w-4 text-accent" aria-hidden />
               {t.videoTeaser.kicker}
             </p>
             <h2 className="font-serif text-3xl font-extrabold text-foreground md:text-4xl lg:text-5xl">
