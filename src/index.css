@@ -53,63 +53,61 @@
   font-display: swap;
 }
 
-/* קובה אליהו — מותג #405F5A (HSL: 168 19% 31%); קרם רק בממליצים */
+/* קובה אליהו — ערכת ירוק עשירה (רקע ירקרק, ניגוד זהב־דבש) */
 
 @layer base {
   :root {
-    /* רקע: גוון בהיר מאותו גוון מותג */
-    --background: 168 16% 91%;
-    --foreground: 168 22% 14%;
+    --background: 152 28% 92%;
+    --foreground: 155 38% 11%;
 
-    /* #405F5A */
-    --primary: 168 19% 31%;
-    --primary-foreground: 42 38% 96%;
-    --primary-hover: 168 19% 26%;
+    --primary: 158 52% 20%;
+    --primary-foreground: 52 40% 97%;
+    --primary-hover: 158 50% 26%;
 
-    --accent: 38 68% 50%;
-    --accent-foreground: 168 22% 12%;
+    --accent: 42 78% 54%;
+    --accent-foreground: 155 38% 11%;
 
     --destructive: 350 65% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    --secondary: 168 14% 84%;
-    --secondary-foreground: 168 20% 16%;
+    --secondary: 150 22% 86%;
+    --secondary-foreground: 155 32% 14%;
 
-    --muted: 168 12% 86%;
-    --muted-foreground: 168 14% 34%;
+    --muted: 148 20% 88%;
+    --muted-foreground: 152 18% 34%;
 
-    --border: 168 12% 78%;
-    --input: 168 12% 80%;
-    --ring: 168 19% 31%;
+    --border: 150 18% 78%;
+    --input: 150 18% 80%;
+    --ring: 158 52% 22%;
 
-    --card: 168 14% 93%;
-    --card-foreground: 168 22% 14%;
+    --card: 150 24% 96%;
+    --card-foreground: 155 38% 11%;
 
-    --popover: 168 14% 94%;
-    --popover-foreground: 168 22% 14%;
+    --popover: 150 26% 97%;
+    --popover-foreground: 155 38% 11%;
 
-    --nav-background: 168 16% 92%;
-    --nav-foreground: 168 22% 14%;
-    --nav-hover: 168 19% 31%;
+    --nav-background: 152 26% 94%;
+    --nav-foreground: 155 38% 11%;
+    --nav-hover: 158 52% 22%;
 
-    --status-bar: 168 19% 28%;
-    --status-bar-foreground: 42 38% 96%;
+    --status-bar: 158 48% 16%;
+    --status-bar-foreground: 52 40% 97%;
 
-    --testimonials-cream: 42 36% 94%;
-    --testimonials-cream-card: 40 30% 97%;
-    --testimonials-foreground: 168 20% 14%;
+    --testimonials-cream: 44 38% 94%;
+    --testimonials-cream-card: 42 32% 97%;
+    --testimonials-foreground: 155 34% 13%;
 
     --radius: 0.5rem;
     --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 168 14% 88%;
-    --sidebar-foreground: 168 20% 16%;
-    --sidebar-primary: 168 19% 31%;
-    --sidebar-primary-foreground: 42 38% 96%;
-    --sidebar-accent: 168 12% 82%;
-    --sidebar-accent-foreground: 168 22% 14%;
-    --sidebar-border: 168 10% 76%;
-    --sidebar-ring: 168 19% 31%;
+    --sidebar-background: 152 24% 91%;
+    --sidebar-foreground: 155 32% 14%;
+    --sidebar-primary: 158 52% 22%;
+    --sidebar-primary-foreground: 52 40% 97%;
+    --sidebar-accent: 148 20% 86%;
+    --sidebar-accent-foreground: 155 38% 11%;
+    --sidebar-border: 150 16% 78%;
+    --sidebar-ring: 158 52% 22%;
   }
 }
 
