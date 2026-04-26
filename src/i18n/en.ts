@@ -69,14 +69,6 @@ export const en: typeof he = {
     title: "Follow Us on Instagram",
     subtitle: "Join the Kube Eliyahu family — updates, recipes, and new flavors",
   },
-  videoTeaser: {
-    kicker: "From the pot to your plate",
-    title: "Want us to pour for you?",
-    subtitle:
-      "Fresh kubbeh, simmering soup, and the aroma that fills the kitchen — just like at grandma's. We'll pour the experience for you; all that's left is to pick where to lift the lid (our store locations are waiting).",
-    cta: "Where to buy",
-    videoAria: "Short video: Kube Eliyahu in soup",
-  },
   footer: {
     brandDescription: "Grandma's flavors — traditional homemade kubbeh crafted with love",
     quickLinks: "Quick Links",

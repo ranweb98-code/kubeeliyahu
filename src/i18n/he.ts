@@ -68,14 +68,6 @@ export const he = {
     title: "עקבו אחרינו באינסטגרם" as string,
     subtitle: "הצטרפו למשפחת קובה אליהו – עדכונים, מתכונים וטעמים חדשים" as string,
   },
-  videoTeaser: {
-    kicker: "מהסיר אל הצלחת" as string,
-    title: "רוצים שנמזוג לכם?" as string,
-    subtitle:
-      "קובה טרייה, מרק רותח, והריח שממלא את המטבח — בדיוק כמו אצל סבתא. נשפוך לכם את החוויה: רק תבחרו איפה לפתוח את הסיר (נקודות הרכישה מחכות לכם)." as string,
-    cta: "איפה לקנות" as string,
-    videoAria: "סרטון: קובה אליהו במרק" as string,
-  },
   footer: {
     brandDescription: "טעמים מבית סבתא — קובה ביתית מסורתית בהכנה אישית ובאהבה" as string,
     quickLinks: "ניווט מהיר" as string,

@@ -57,6 +57,9 @@ export default {
           DEFAULT: "hsl(var(--status-bar))",
           foreground: "hsl(var(--status-bar-foreground))",
         },
+        testimonial: {
+          gold: "hsl(var(--testimonials-gold))",
+        },
         "nav": {
           DEFAULT: "hsl(var(--nav-background))",
           foreground: "hsl(var(--nav-foreground))",
