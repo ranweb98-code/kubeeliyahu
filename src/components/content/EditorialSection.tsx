@@ -40,7 +40,7 @@ const CountUp = ({ target, suffix = "" }: { target: number; suffix?: string }) =
 
   return (
     <div ref={ref} className="text-center">
-      <p className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-accent mb-2">
+      <p className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-background mb-2">
         +{count}{suffix}
       </p>
     </div>
