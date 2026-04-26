@@ -21,6 +21,7 @@ export const en: typeof he = {
   whyChoose: {
     title: "Why Choose Us?",
     subtitle: "Because Kube Eliyahu isn't just kubbeh — it's the taste of home",
+    videoAria: "Video: kubbeh",
     features: [
       { title: "Grandma's Recipe", description: "A traditional recipe passed down from generation to generation" },
       { title: "Natural Ingredients", description: "Premium fresh ingredients with no preservatives" },
@@ -50,6 +51,7 @@ export const en: typeof he = {
     ],
   },
   editorial: {
+    videoAria: "Video: yellow kubbeh",
     stats: [
       { label: "Years of Experience" },
       { label: "Points of Sale" },

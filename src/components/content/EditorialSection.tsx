@@ -54,9 +54,18 @@ const EditorialSection = () => {
 
   return (
     <section className="w-full py-20 px-6" dir={dir}>
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-5xl">
         <AnimateOnScroll className="mb-16">
-          <div className="bg-primary rounded-2xl p-6 md:p-14 overflow-hidden">
+          <video
+            src="/videos/kubbeh-2.mov"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="mx-auto mb-10 h-auto w-full max-w-[420px] rounded-3xl shadow-md md:max-w-xl md:shadow-lg lg:max-w-2xl xl:max-w-3xl"
+            aria-label={t.editorial.videoAria}
+          />
+          <div className="overflow-hidden rounded-2xl bg-primary p-6 md:p-14">
             <div className="grid grid-cols-3 gap-6">
               {t.editorial.stats.map((s, i) => (
                 <div key={i} className="text-center">

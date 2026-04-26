@@ -20,6 +20,7 @@ export const he = {
   whyChoose: {
     title: "למה לבחור בנו?" as string,
     subtitle: "כי קובה אליהו זה לא סתם קובה — זה טעם של בית" as string,
+    videoAria: "סרטון: קובה" as string,
     features: [
       { title: "מתכון מסבתא", description: "מתכון מסורתי שעובר מדור לדור, בדיוק כמו פעם" },
       { title: "מרכיבים טבעיים", description: "חומרי גלם איכותיים וטריים ללא חומרים משמרים" },
@@ -49,6 +50,7 @@ export const he = {
     ] as { name: string; description: string }[],
   },
   editorial: {
+    videoAria: "סרטון: קובה צהוב" as string,
     stats: [
       { label: "שנות ניסיון" },
       { label: "נקודות מכירה" },

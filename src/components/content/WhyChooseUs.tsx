@@ -17,7 +17,8 @@ const WhyChooseUs = () => {
             loop
             muted
             playsInline
-            className="w-full max-w-[420px] h-auto mx-auto rounded-3xl"
+            className="mx-auto h-auto w-full max-w-[420px] rounded-3xl md:max-w-2xl md:shadow-lg lg:max-w-3xl xl:max-w-4xl"
+            aria-label={t.whyChoose.videoAria}
           />
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3 mt-6">
             {t.whyChoose.title}
