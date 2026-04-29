@@ -134,7 +134,6 @@ const Contact = () => {
               <Send className="w-10 h-10 text-primary mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-foreground mb-2">{t.contact.formTitle}</h2>
               <p className="text-muted-foreground text-sm">{t.contact.formSubtitle}</p>
-              <p className="mt-3 text-xs text-muted-foreground leading-relaxed md:text-sm">{t.contact.formHowItWorks}</p>
             </div>
             <form
               method="POST"
