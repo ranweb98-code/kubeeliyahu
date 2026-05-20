@@ -12,7 +12,7 @@ const WhyChooseUs = () => {
       <div className="max-w-5xl mx-auto">
         <AnimateOnScroll className="text-center mb-14">
           <video
-            src="/videos/kubbeh.mov"
+            src="/videos/kubbeh.mp4"
             autoPlay
             loop
             muted
@@ -54,5 +54,6 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
+
 
 

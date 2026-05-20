@@ -25,3 +25,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Large source videos (use compressed .mp4 in repo)
+public/videos/kubbeh.mov
