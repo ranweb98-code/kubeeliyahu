@@ -28,3 +28,4 @@ dist-ssr
 
 # Large source videos (use compressed .mp4 in repo)
 public/videos/kubbeh.mov
+public/videos/kubbeh-2.mov

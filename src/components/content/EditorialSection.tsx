@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -57,7 +57,7 @@ const EditorialSection = () => {
       <div className="mx-auto max-w-5xl">
         <AnimateOnScroll className="mb-16">
           <video
-            src="/videos/kubbeh-2.mov"
+            src="/videos/kubbeh-2.mp4"
             autoPlay
             loop
             muted
@@ -82,3 +82,4 @@ const EditorialSection = () => {
 };
 
 export default EditorialSection;
+
