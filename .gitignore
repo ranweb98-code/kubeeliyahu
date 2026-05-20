@@ -1,4 +1,4 @@
-# Logs
+﻿# Logs
 logs
 *.log
 npm-debug.log*
@@ -12,6 +12,7 @@ node_modules
 .env.*
 !.env.example
 dist
+dist-deploy
 dist-ssr
 *.local
 
@@ -29,3 +30,4 @@ dist-ssr
 # Large source videos (use compressed .mp4 in repo)
 public/videos/kubbeh.mov
 public/videos/kubbeh-2.mov
+

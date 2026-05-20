@@ -1,4 +1,4 @@
-{
+﻿{
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kubeeliyahu",
   "compatibility_date": "2026-05-20",
@@ -6,8 +6,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": "./dist",
-    "not_found_handling": "single-page-application",
-    "exclude": ["**/*.mov", "**/*.MOV"]
+    "directory": "./dist-deploy",
+    "not_found_handling": "single-page-application"
   }
 }
