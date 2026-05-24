@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 const CheckoutHeader = () => {
   return (
@@ -18,9 +19,9 @@ const CheckoutHeader = () => {
           {/* Center - Logo - Absolutely positioned to ensure perfect centering */}
           <Link to="/" className="absolute left-1/2 transform -translate-x-1/2">
             <img 
-              src="/LINEA-1.svg" 
-              alt="Linea Jewelry Inc" 
-              className="h-6 w-auto"
+              src={logo}
+              alt="קובה אליהו"
+              className="h-6 w-6 rounded-full object-cover"
             />
           </Link>
 
