@@ -20,17 +20,19 @@ const LargeHero = () => {
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center sm:px-8 md:px-10">
           <h1
-            className="mb-4 animate-hero-slide-up text-4xl font-extrabold text-white sm:text-5xl md:mb-5 md:text-7xl lg:mb-6 lg:text-8xl xl:text-9xl"
+            className="mb-4 animate-hero-slide-up text-4xl font-extrabold text-white sm:text-5xl md:mb-5 md:text-6xl lg:mb-6 lg:text-7xl xl:text-8xl"
             style={{ animationDelay: "0.2s" }}
           >
             {t.hero.title}
           </h1>
-          <p
-            className="mb-2 animate-hero-slide-up text-lg font-light text-white/90 sm:text-xl md:mb-3 md:text-2xl lg:text-3xl xl:text-4xl"
-            style={{ animationDelay: "0.5s" }}
-          >
-            {t.hero.subtitle}
-          </p>
+          {t.hero.subtitle ? (
+            <p
+              className="mb-2 animate-hero-slide-up text-lg font-light text-white/90 sm:text-xl md:mb-3 md:text-2xl lg:text-3xl xl:text-4xl"
+              style={{ animationDelay: "0.5s" }}
+            >
+              {t.hero.subtitle}
+            </p>
+          ) : null}
           <p
             className="mb-8 max-w-md animate-hero-slide-up text-base text-white/70 md:mb-10 md:max-w-xl md:text-lg lg:mb-12 lg:max-w-2xl lg:text-xl"
             style={{ animationDelay: "0.7s" }}
