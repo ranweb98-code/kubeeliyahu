@@ -67,15 +67,69 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
     return json({ success: false, error: "server_misconfigured" }, 500);
   }
 
+  const sentAt = new Intl.DateTimeFormat("he-IL", {
+    dateStyle: "long",
+    timeStyle: "short",
+    timeZone: "Asia/Jerusalem",
+  }).format(new Date());
+
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safeMessage = escapeHtml(message);
+
   const html = `
-    <div style="font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#1a1a1a">
-      <h2 style="margin:0 0 16px">פנייה חדשה מאתר קובה אליהו</h2>
-      <p style="margin:0 0 8px"><strong>שם:</strong> ${escapeHtml(name)}</p>
-      <p style="margin:0 0 8px"><strong>אימייל:</strong> ${escapeHtml(email)}</p>
-      <p style="margin:16px 0 4px"><strong>הודעה:</strong></p>
-      <p style="margin:0;white-space:pre-wrap">${escapeHtml(message)}</p>
-    </div>
-  `.trim();
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background-color:#f4f7f5;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f7f5;padding:32px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(31,81,65,0.10);font-family:Arial,Helvetica,sans-serif;">
+
+        <tr><td style="background-color:#1F5141;padding:28px 32px;text-align:right;">
+          <div style="color:#ffffff;font-size:22px;font-weight:bold;">קובה אליהו</div>
+          <div style="color:#cfe0d8;font-size:14px;margin-top:4px;">פנייה חדשה מטופס יצירת הקשר באתר</div>
+          <div style="height:3px;width:64px;background-color:#D1A639;margin-top:14px;border-radius:2px;"></div>
+        </td></tr>
+
+        <tr><td style="padding:20px 32px 0;text-align:right;">
+          <span style="display:inline-block;background:#f0f4f1;color:#1F5141;font-size:12px;font-weight:bold;padding:6px 12px;border-radius:999px;">${escapeHtml(sentAt)}</span>
+        </td></tr>
+
+        <tr><td style="padding:20px 32px 0;text-align:right;color:#1a1a1a;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:15px;">
+            <tr>
+              <td style="padding:8px 0;color:#6b7c74;width:90px;vertical-align:top;">שם</td>
+              <td style="padding:8px 0;font-weight:bold;">${safeName}</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;color:#6b7c74;vertical-align:top;">אימייל</td>
+              <td style="padding:8px 0;font-weight:bold;" dir="ltr"><a href="mailto:${safeEmail}" style="color:#1F5141;text-decoration:none;">${safeEmail}</a></td>
+            </tr>
+          </table>
+        </td></tr>
+
+        <tr><td style="padding:16px 32px 0;text-align:right;">
+          <div style="color:#6b7c74;font-size:13px;font-weight:bold;margin-bottom:8px;">הודעה</div>
+          <div style="background:#f7faf8;border:1px solid #e6ede9;border-radius:12px;padding:16px 18px;color:#1a1a1a;font-size:15px;line-height:1.7;white-space:pre-wrap;">${safeMessage}</div>
+        </td></tr>
+
+        <tr><td style="padding:24px 32px 8px;text-align:right;">
+          <a href="mailto:${safeEmail}" style="display:inline-block;background-color:#D1A639;color:#1a1a1a;font-size:15px;font-weight:bold;text-decoration:none;padding:12px 28px;border-radius:999px;">השב לפונה ←</a>
+        </td></tr>
+
+        <tr><td style="padding:20px 32px 28px;text-align:right;">
+          <hr style="border:none;border-top:1px solid #eef2ef;margin:0 0 14px;">
+          <div style="color:#9aa8a1;font-size:12px;line-height:1.6;">הודעה זו נשלחה אוטומטית מטופס יצירת הקשר באתר <a href="https://kubeeliyahu.com" style="color:#1F5141;text-decoration:none;">kubeeliyahu.com</a>. ניתן להשיב ישירות לפונה בלחיצה על "השב".</div>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`.trim();
+
+  const text = `פנייה חדשה מאתר קובה אליהו\n${sentAt}\n\nשם: ${name}\nאימייל: ${email}\n\nהודעה:\n${message}`;
 
   const resendRes = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -89,6 +143,7 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
       reply_to: email,
       subject: `פנייה חדשה מאתר קובה אליהו — ${name}`,
       html,
+      text,
     }),
   });
 
