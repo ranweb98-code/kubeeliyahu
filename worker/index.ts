@@ -6,7 +6,7 @@ interface Env {
 }
 
 const RECIPIENT = "kube8eliyahu@gmail.com";
-const FROM = "Kube Eliyahu <onboarding@resend.dev>";
+const FROM = "קובה אליהו <noreply@kubeeliyahu.com>";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const json = (data: unknown, status = 200) =>
