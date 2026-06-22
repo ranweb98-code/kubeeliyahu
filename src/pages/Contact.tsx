@@ -124,7 +124,7 @@ const Contact = () => {
               </a>
             </div>
 
-            <div className="bg-card rounded-xl p-8 text-center shadow-sm">
+            <div className="bg-card rounded-xl p-8 text-center shadow-sm md:col-span-2">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Facebook className="w-7 h-7 text-primary" />
               </div>
@@ -180,7 +180,7 @@ const Contact = () => {
               <form onSubmit={handleFormSubmit} className="space-y-5 max-w-lg mx-auto" noValidate>
                 <div
                   aria-hidden="true"
-                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
+                  style={{ position: "absolute", width: 1, height: 1, padding: 0, margin: -1, overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0 }}
                 >
                   <label htmlFor="contact-company">Company</label>
                   <input id="contact-company" name="company" type="text" tabIndex={-1} autoComplete="off" />

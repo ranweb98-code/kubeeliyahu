@@ -12,10 +12,9 @@ export const he = {
     ariaLabel: "מעבר לנקודות רכישה" as string,
   },
   hero: {
-    title: "קובה אליהו – טעמים מבית סבתא" as string,
-    subtitle: "" as string,
-    description:
-      "קובה אליהו הינו מאכל מסורתי הישר ממושב זכריה. הקובה בעל ניחוחות וטעמים מבית סבתא אוסנת. חוויה ייחודית של טעמים המעוררים געגועים לילדות. מגוון קובות: סלק, נבאלוסיה, שוונדל ועוד. משלוחים עד הבית." as string,
+    title: "קובה אליהו" as string,
+    subtitle: "טעמים מבית סבתא" as string,
+    description: "קובה ביתית מסורתית בהכנה אישית ובאהבה, מדור לדור" as string,
     orderNow: "איפה לקנות" as string,
   },
   whyChoose: {
