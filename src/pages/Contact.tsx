@@ -1,6 +1,7 @@
+import { useState } from "react";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import { Instagram, Facebook, Clock, MapPin, Mail, Send, Building2 } from "lucide-react";
+import { Instagram, Facebook, Clock, MapPin, Mail, Send, Building2, Loader2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,31 +9,54 @@ import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const WEB3FORMS_ACTION = "https://api.web3forms.com/submit";
+const SEND_ENDPOINT = "/api/send";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const Contact = () => {
   const { toast } = useToast();
   const { t, dir } = useLanguage();
+  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
-    const phone = String(data.get("phone") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
+    const company = String(data.get("company") ?? "").trim(); // honeypot
 
-    if (!name || !phone || !message) {
-      e.preventDefault();
+    if (!name || !email || !message) {
       toast({ title: t.contact.errorTitle, description: t.contact.errorFillAll, variant: "destructive" });
       return;
     }
 
-    if (!/^[\d\-+() ]{7,15}$/.test(phone)) {
-      e.preventDefault();
-      toast({ title: t.contact.errorTitle, description: t.contact.errorInvalidPhone, variant: "destructive" });
+    if (!EMAIL_RE.test(email)) {
+      toast({ title: t.contact.errorTitle, description: t.contact.errorInvalidEmail, variant: "destructive" });
       return;
     }
-    /* ולידציה עברה — השליחה נמשכת כ-POST רגיל ל-Web3Forms */
+
+    setStatus("loading");
+    try {
+      const res = await fetch(SEND_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message, company }),
+      });
+      const result = await res.json().catch(() => ({ success: false }));
+
+      if (res.ok && result.success) {
+        form.reset();
+        setStatus("success");
+        toast({ title: t.contact.thankYou, description: t.contact.thankYouDesc });
+      } else {
+        setStatus("idle");
+        toast({ title: t.contact.errorTitle, description: t.contact.errorSendFailed, variant: "destructive" });
+      }
+    } catch {
+      setStatus("idle");
+      toast({ title: t.contact.errorTitle, description: t.contact.errorSendFailed, variant: "destructive" });
+    }
   };
 
   return (
@@ -135,68 +159,95 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-foreground mb-2">{t.contact.formTitle}</h2>
               <p className="text-muted-foreground text-sm">{t.contact.formSubtitle}</p>
             </div>
-            <form
-              method="POST"
-              action={WEB3FORMS_ACTION}
-              onSubmit={handleFormSubmit}
-              className="space-y-5 max-w-lg mx-auto"
-            >
-              <input type="hidden" name="access_key" value="8267950f-79b9-41b5-b066-d9141f935fe1" />
-              <input type="hidden" name="to" value="kube8eliyahu@gmail.com" />
-              <input type="hidden" name="subject" value="פנייה חדשה מאתר קובה אליהו" />
-              <input type="hidden" name="from_name" value="קובה אליהו - טופס יצירת קשר" />
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="contact-name">
-                  {t.contact.nameLabel}
-                </label>
-                <Input
-                  id="contact-name"
-                  name="name"
-                  required
-                  maxLength={100}
-                  placeholder={t.contact.namePlaceholder}
-                  className="rounded-lg"
-                  autoComplete="name"
-                />
+            {status === "success" ? (
+              <div className="max-w-lg mx-auto text-center py-8" role="status" aria-live="polite">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
+                  <CheckCircle2 className="w-9 h-9 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">{t.contact.thankYou}</h3>
+                <p className="text-muted-foreground text-sm mb-6">{t.contact.thankYouDesc}</p>
+                <Button
+                  type="button"
+                  onClick={() => setStatus("idle")}
+                  variant="outline"
+                  className="rounded-full px-6"
+                >
+                  {t.contact.sendAnother}
+                </Button>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="contact-phone">
-                  {t.contact.phoneLabel}
-                </label>
-                <Input
-                  id="contact-phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  maxLength={15}
-                  placeholder="050-000-0000"
-                  className="rounded-lg"
-                  dir="ltr"
-                  autoComplete="tel"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="contact-message">
-                  {t.contact.messageLabel}
-                </label>
-                <Textarea
-                  id="contact-message"
-                  name="message"
-                  required
-                  maxLength={1000}
-                  placeholder={t.contact.messagePlaceholder}
-                  className="rounded-lg min-h-[120px]"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary-hover rounded-full py-3 text-base font-semibold gap-2"
-              >
-                <Send className="w-4 h-4" />
-                {t.contact.send}
-              </Button>
-            </form>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="space-y-5 max-w-lg mx-auto" noValidate>
+                <div
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}
+                >
+                  <label htmlFor="contact-company">Company</label>
+                  <input id="contact-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="contact-name">
+                    {t.contact.nameLabel}
+                  </label>
+                  <Input
+                    id="contact-name"
+                    name="name"
+                    required
+                    maxLength={100}
+                    placeholder={t.contact.namePlaceholder}
+                    className="rounded-lg"
+                    autoComplete="name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="contact-email">
+                    {t.contact.emailLabel}
+                  </label>
+                  <Input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    maxLength={200}
+                    placeholder={t.contact.emailPlaceholder}
+                    className="rounded-lg"
+                    dir="ltr"
+                    autoComplete="email"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5" htmlFor="contact-message">
+                    {t.contact.messageLabel}
+                  </label>
+                  <Textarea
+                    id="contact-message"
+                    name="message"
+                    required
+                    maxLength={5000}
+                    placeholder={t.contact.messagePlaceholder}
+                    className="rounded-lg min-h-[120px]"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary-hover rounded-full py-3 text-base font-semibold gap-2 disabled:opacity-70"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      {t.contact.sending}
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      {t.contact.send}
+                    </>
+                  )}
+                </Button>
+              </form>
+            )}
           </div>
 
           <div className="mt-12 bg-primary rounded-2xl p-8 md:p-12 text-center">
