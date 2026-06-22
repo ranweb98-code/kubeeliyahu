@@ -97,16 +97,14 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
         </td></tr>
 
         <tr><td style="padding:20px 32px 0;text-align:right;color:#1a1a1a;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:15px;">
-            <tr>
-              <td style="padding:8px 0;color:#6b7c74;width:90px;vertical-align:top;">שם</td>
-              <td style="padding:8px 0;font-weight:bold;">${safeName}</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 0;color:#6b7c74;vertical-align:top;">אימייל</td>
-              <td style="padding:8px 0;font-weight:bold;" dir="ltr"><a href="mailto:${safeEmail}" style="color:#1F5141;text-decoration:none;">${safeEmail}</a></td>
-            </tr>
-          </table>
+          <div style="margin-bottom:14px;">
+            <div style="color:#6b7c74;font-size:13px;font-weight:bold;margin-bottom:4px;">שם</div>
+            <div style="font-size:16px;font-weight:bold;">${safeName}</div>
+          </div>
+          <div>
+            <div style="color:#6b7c74;font-size:13px;font-weight:bold;margin-bottom:4px;">אימייל</div>
+            <div style="font-size:16px;font-weight:bold;"><a href="mailto:${safeEmail}" dir="ltr" style="color:#1F5141;text-decoration:none;unicode-bidi:isolate;">${safeEmail}</a></div>
+          </div>
         </td></tr>
 
         <tr><td style="padding:16px 32px 0;text-align:right;">
