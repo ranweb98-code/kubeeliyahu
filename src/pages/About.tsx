@@ -3,7 +3,6 @@ import Footer from "../components/footer/Footer";
 import { useLanguage } from "@/i18n/LanguageContext";
 import kubbeh6 from "@/assets/kubbeh-6.jpg";
 import kubbeh8 from "@/assets/kubbeh-8.jpg";
-import grandmaIllustration from "@/assets/grandma-illustration-new.png";
 
 const About = () => {
   const { t, dir } = useLanguage();
@@ -25,11 +24,20 @@ const About = () => {
 
           <div className="space-y-16">
             <div className="flex justify-center">
-              <img
-                src={grandmaIllustration}
-                alt={t.about.grandmaAlt}
-                className="w-72 md:w-[22rem] h-auto object-contain"
-              />
+              <div
+                className="w-72 md:w-[22rem] aspect-[1504/1376] overflow-hidden bg-background isolate [transform:translateZ(0)]"
+              >
+                <video
+                  src="/videos/grandma-about.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={t.about.grandmaAlt}
+                  className="block h-full w-full bg-background object-cover"
+                  style={{ backgroundColor: "hsl(var(--background))" }}
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
