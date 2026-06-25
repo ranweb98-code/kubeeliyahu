@@ -43,11 +43,15 @@ const SplashScreen = ({ onFinish }: SplashScreenProps) => {
         />
       </div>
 
-      <div className="mt-8 flex gap-2 animate-fade-in" aria-hidden="true">
-        <span className="h-2.5 w-2.5 rounded-full bg-accent animate-pulse" style={{ animationDelay: "0ms" }} />
-        <span className="h-2.5 w-2.5 rounded-full bg-accent animate-pulse" style={{ animationDelay: "200ms" }} />
-        <span className="h-2.5 w-2.5 rounded-full bg-accent animate-pulse" style={{ animationDelay: "400ms" }} />
-      </div>
+      <video
+        src="/videos/loading.webm"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+        className="mt-8 h-16 w-auto animate-fade-in"
+      />
     </div>
   );
 };
