@@ -90,7 +90,8 @@ const Navigation = () => {
               muted
               playsInline
               aria-hidden="true"
-              className="h-full w-full scale-105 object-cover"
+              className="h-full w-full scale-110 object-cover"
+              style={{ objectPosition: "53% center" }}
             />
           </div>
         </Link>
