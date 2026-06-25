@@ -1,20 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import logo from "@/assets/logo.jpg";
 
 interface SplashScreenProps {
   onLeaveStart?: () => void;
   onFinish: () => void;
 }
 
-const VISIBLE_MS = 3000;
+const VISIBLE_MS = 1900;
 const FADE_MS = 700;
-const CONTENT_LEAD_MS = 600;
-
-// Matches the cream background baked into the splash video, so there is no
-// flash before the video paints and no visible seam around it.
-const CREAM_BG = "#E9E0C1";
+const LOADER_LEAD_MS = 500;
 
 const SplashScreen = ({ onLeaveStart, onFinish }: SplashScreenProps) => {
   const [leaving, setLeaving] = useState(false);
+  const [hideLoader, setHideLoader] = useState(false);
 
   // Keep refs so the one-time effect always calls the latest callbacks
   // without restarting when the parent re-renders.
@@ -24,24 +22,27 @@ const SplashScreen = ({ onLeaveStart, onFinish }: SplashScreenProps) => {
   useEffect(() => { onFinishRef.current = onFinish; }, [onFinish]);
 
   useEffect(() => {
+    // Lock scroll
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // Mount the page content while the splash still fully covers the screen,
-    // so React settles before the visual fade begins (avoids jank).
-    const contentTimer = window.setTimeout(() => {
+    const loaderTimer = window.setTimeout(() => {
+      setHideLoader(true);
+      // Mount content now (while the splash still fully covers the screen)
+      // so React finishes rendering before the visual fade begins.
       onLeaveStartRef.current?.();
-    }, VISIBLE_MS - CONTENT_LEAD_MS);
+    }, VISIBLE_MS - LOADER_LEAD_MS);
     const fadeTimer = window.setTimeout(() => {
       setLeaving(true);
     }, VISIBLE_MS);
     const doneTimer = window.setTimeout(() => {
+      // Unlock scroll, then remove the overlay
       document.body.style.overflow = prev;
       onFinishRef.current();
     }, VISIBLE_MS + FADE_MS);
 
     return () => {
-      window.clearTimeout(contentTimer);
+      window.clearTimeout(loaderTimer);
       window.clearTimeout(fadeTimer);
       window.clearTimeout(doneTimer);
       document.body.style.overflow = prev;
@@ -54,19 +55,27 @@ const SplashScreen = ({ onLeaveStart, onFinish }: SplashScreenProps) => {
       role="status"
       aria-live="polite"
       aria-label="קובה אליהו — טוען"
-      className={`fixed inset-0 z-[9999] overflow-hidden transition-opacity ease-out ${
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-primary transition-opacity ease-out ${
         leaving ? "opacity-0" : "opacity-100"
       }`}
-      style={{ transitionDuration: `${FADE_MS}ms`, backgroundColor: CREAM_BG }}
+      style={{ transitionDuration: `${FADE_MS}ms` }}
     >
+      <img
+        src={logo}
+        alt="קובה אליהו"
+        className="h-24 w-24 rounded-full shadow-2xl ring-4 ring-white/20 md:h-28 md:w-28"
+      />
+
       <video
-        src="/videos/splash.mp4"
+        src="/videos/loading.webm"
         autoPlay
+        loop
         muted
         playsInline
-        preload="auto"
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
+        className={`mt-6 h-28 w-auto mix-blend-screen transition-opacity duration-500 ease-out md:h-32 ${
+          hideLoader ? "opacity-0" : "opacity-100"
+        }`}
       />
     </div>
   );
