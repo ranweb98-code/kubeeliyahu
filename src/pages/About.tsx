@@ -4,6 +4,9 @@ import { useLanguage } from "@/i18n/LanguageContext";
 import kubbeh6 from "@/assets/kubbeh-6.jpg";
 import kubbeh8 from "@/assets/kubbeh-8.jpg";
 
+// Must match --background (160 12% 97%) exactly; hex paints reliably on <video> during scroll compositing.
+const SITE_BG = "#f6f8f8";
+
 const About = () => {
   const { t, dir } = useLanguage();
 
@@ -28,7 +31,10 @@ const About = () => {
               className="grid grid-cols-1 md:grid-cols-[minmax(0,22rem)_1fr] gap-10 md:gap-12 lg:gap-16 items-center"
             >
               <div className="flex justify-center md:justify-start">
-                <div className="w-72 md:w-full max-w-[22rem] aspect-[1504/1376] overflow-hidden bg-background isolate [transform:translateZ(0)]">
+                <div
+                  className="w-72 md:w-full max-w-[22rem] rounded-xl overflow-clip leading-[0]"
+                  style={{ backgroundColor: SITE_BG }}
+                >
                   <video
                     src="/videos/grandma-about.mp4"
                     autoPlay
@@ -36,8 +42,11 @@ const About = () => {
                     muted
                     playsInline
                     aria-label={t.about.grandmaAlt}
-                    className="block h-full w-full bg-background object-cover"
-                    style={{ backgroundColor: "hsl(var(--background))" }}
+                    className="block w-full h-auto rounded-xl"
+                    style={{
+                      backgroundColor: SITE_BG,
+                      outline: `1px solid ${SITE_BG}`,
+                    }}
                   />
                 </div>
               </div>
