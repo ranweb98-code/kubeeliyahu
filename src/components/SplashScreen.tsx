@@ -2,28 +2,39 @@ import { useEffect, useState } from "react";
 import logo from "@/assets/logo.jpg";
 
 interface SplashScreenProps {
+  onLeaveStart?: () => void;
   onFinish: () => void;
 }
 
-const VISIBLE_MS = 3200;
+const VISIBLE_MS = 1900;
 const FADE_MS = 700;
+const LOADER_LEAD_MS = 500;
 
-const SplashScreen = ({ onFinish }: SplashScreenProps) => {
+const SplashScreen = ({ onLeaveStart, onFinish }: SplashScreenProps) => {
   const [leaving, setLeaving] = useState(false);
+  const [hideLoader, setHideLoader] = useState(false);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const fadeTimer = window.setTimeout(() => setLeaving(true), VISIBLE_MS);
-    const doneTimer = window.setTimeout(onFinish, VISIBLE_MS + FADE_MS);
+    const loaderTimer = window.setTimeout(() => setHideLoader(true), VISIBLE_MS - LOADER_LEAD_MS);
+    const fadeTimer = window.setTimeout(() => {
+      setLeaving(true);
+      onLeaveStart?.();
+    }, VISIBLE_MS);
+    const doneTimer = window.setTimeout(() => {
+      document.body.style.overflow = previousOverflow;
+      onFinish();
+    }, VISIBLE_MS + FADE_MS);
 
     return () => {
+      window.clearTimeout(loaderTimer);
       window.clearTimeout(fadeTimer);
       window.clearTimeout(doneTimer);
       document.body.style.overflow = previousOverflow;
     };
-  }, [onFinish]);
+  }, [onFinish, onLeaveStart]);
 
   return (
     <div
@@ -48,7 +59,9 @@ const SplashScreen = ({ onFinish }: SplashScreenProps) => {
         muted
         playsInline
         aria-hidden="true"
-        className="mt-6 h-28 w-auto mix-blend-screen md:h-32"
+        className={`mt-6 h-28 w-auto mix-blend-screen transition-opacity duration-500 ease-out md:h-32 ${
+          hideLoader ? "opacity-0" : "opacity-100"
+        }`}
       />
     </div>
   );
