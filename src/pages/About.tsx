@@ -12,7 +12,7 @@ const About = () => {
       <Header />
       
       <main className="pt-32 pb-12 px-6">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
               {t.about.title}
@@ -23,20 +23,38 @@ const About = () => {
           </div>
 
           <div className="space-y-16">
-            <div className="flex justify-center">
-              <div
-                className="w-72 md:w-[22rem] aspect-[1504/1376] overflow-hidden bg-background isolate [transform:translateZ(0)]"
-              >
-                <video
-                  src="/videos/grandma-about.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-label={t.about.grandmaAlt}
-                  className="block h-full w-full bg-background object-cover"
-                  style={{ backgroundColor: "hsl(var(--background))" }}
-                />
+            <div
+              dir="ltr"
+              className="grid grid-cols-1 md:grid-cols-[minmax(0,22rem)_1fr] gap-10 md:gap-12 lg:gap-16 items-center"
+            >
+              <div className="flex justify-center md:justify-start">
+                <div className="w-72 md:w-full max-w-[22rem] aspect-[1504/1376] overflow-hidden bg-background isolate [transform:translateZ(0)]">
+                  <video
+                    src="/videos/grandma-about.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    aria-label={t.about.grandmaAlt}
+                    className="block h-full w-full bg-background object-cover"
+                    style={{ backgroundColor: "hsl(var(--background))" }}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-5" dir={dir}>
+                <h2 className="font-serif text-2xl md:text-3xl font-bold text-foreground leading-snug">
+                  {t.about.grandmaSectionTitle}
+                </h2>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-[1.05rem]">
+                  {t.about.grandmaSectionP1}
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-[1.05rem]">
+                  {t.about.grandmaSectionP2}
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-base md:text-[1.05rem]">
+                  {t.about.grandmaSectionP3}
+                </p>
               </div>
             </div>
 

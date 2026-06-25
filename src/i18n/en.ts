@@ -86,6 +86,13 @@ export const en: typeof he = {
     title: "Our Story",
     subtitle: "A tradition of flavor, love for cooking, and recipes passed down through generations",
     grandmaAlt: "Grandma illustration",
+    grandmaSectionTitle: "The Heart of the Kitchen — Grandma",
+    grandmaSectionP1:
+      "The illustration you see here is not just decoration. It represents the grandmother where it all began — the hands that knead the dough, the soup simmering on the stove, and the smile that accompanies every family meal. This is how home feels to us: warm, welcoming, and full of flavors you never forget.",
+    grandmaSectionP2:
+      "Kube Eliyahu was born from a genuine love for the traditional home kitchen. Our recipes are passed down from generation to generation — from that same grandmother, with the same care, using the same ingredients remembered from childhood. Every kubbeh is made in our kitchen by hands that know the craft, with no shortcuts and no compromise on taste.",
+    grandmaSectionP3:
+      "When you prepare our kubbeh at home, you are not just heating soup — you are bringing the family to the table, carrying on a tradition, and giving your guests the true taste of home. That is exactly what Grandma wanted: food that connects, warms, and leaves a mark on the heart.",
     section1Title: "Grandma's Recipe",
     section1P1: "Kube Eliyahu was born from a genuine love for the traditional home kitchen. Our recipes are passed down from generation to generation, with the same authentic taste remembered from grandma's house.",
     section1P2: "Every kubbeh is prepared in our kitchen with fresh, high-quality ingredients, without preservatives or unnecessary additives.",
