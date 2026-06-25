@@ -26,10 +26,14 @@ const SplashScreen = ({ onLeaveStart, onFinish }: SplashScreenProps) => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const loaderTimer = window.setTimeout(() => setHideLoader(true), VISIBLE_MS - LOADER_LEAD_MS);
+    const loaderTimer = window.setTimeout(() => {
+      setHideLoader(true);
+      // Mount content now (while the splash still fully covers the screen)
+      // so React finishes rendering before the visual fade begins.
+      onLeaveStartRef.current?.();
+    }, VISIBLE_MS - LOADER_LEAD_MS);
     const fadeTimer = window.setTimeout(() => {
       setLeaving(true);
-      onLeaveStartRef.current?.();
     }, VISIBLE_MS);
     const doneTimer = window.setTimeout(() => {
       // Unlock scroll, then remove the overlay
