@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "@/assets/logo.jpg";
 
 interface SplashScreenProps {
@@ -14,27 +14,37 @@ const SplashScreen = ({ onLeaveStart, onFinish }: SplashScreenProps) => {
   const [leaving, setLeaving] = useState(false);
   const [hideLoader, setHideLoader] = useState(false);
 
+  // Keep refs so the one-time effect always calls the latest callbacks
+  // without restarting when the parent re-renders.
+  const onLeaveStartRef = useRef(onLeaveStart);
+  const onFinishRef = useRef(onFinish);
+  useEffect(() => { onLeaveStartRef.current = onLeaveStart; }, [onLeaveStart]);
+  useEffect(() => { onFinishRef.current = onFinish; }, [onFinish]);
+
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
+    // Lock scroll
+    const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const loaderTimer = window.setTimeout(() => setHideLoader(true), VISIBLE_MS - LOADER_LEAD_MS);
     const fadeTimer = window.setTimeout(() => {
       setLeaving(true);
-      onLeaveStart?.();
+      onLeaveStartRef.current?.();
     }, VISIBLE_MS);
     const doneTimer = window.setTimeout(() => {
-      document.body.style.overflow = previousOverflow;
-      onFinish();
+      // Unlock scroll, then remove the overlay
+      document.body.style.overflow = prev;
+      onFinishRef.current();
     }, VISIBLE_MS + FADE_MS);
 
     return () => {
       window.clearTimeout(loaderTimer);
       window.clearTimeout(fadeTimer);
       window.clearTimeout(doneTimer);
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = prev;
     };
-  }, [onFinish, onLeaveStart]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run exactly once — callbacks accessed via refs
 
   return (
     <div
