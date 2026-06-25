@@ -35,13 +35,11 @@ const SplashScreen = ({ onFinish }: SplashScreenProps) => {
       }`}
       style={{ transitionDuration: `${FADE_MS}ms` }}
     >
-      <div className="animate-splash-breathe">
-        <img
-          src={logo}
-          alt="קובה אליהו"
-          className="h-32 w-32 rounded-full shadow-2xl ring-4 ring-white/20 animate-splash-in md:h-40 md:w-40"
-        />
-      </div>
+      <img
+        src={logo}
+        alt="קובה אליהו"
+        className="h-24 w-24 rounded-full shadow-2xl ring-4 ring-white/20 md:h-28 md:w-28"
+      />
 
       <video
         src="/videos/loading.webm"
@@ -50,7 +48,7 @@ const SplashScreen = ({ onFinish }: SplashScreenProps) => {
         muted
         playsInline
         aria-hidden="true"
-        className="mt-8 h-16 w-auto animate-fade-in"
+        className="mt-6 h-28 w-auto mix-blend-screen md:h-32"
       />
     </div>
   );
