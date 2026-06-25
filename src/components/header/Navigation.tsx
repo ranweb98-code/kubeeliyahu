@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Instagram, Facebook, Globe } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
-import logo from "@/assets/logo.jpg";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -77,17 +76,23 @@ const Navigation = () => {
           </div>
         </button>
 
-        {/* Center logo */}
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-[60%] z-20">
-          <img
-            src={logo}
-            alt="קובה אליהו"
-            className={`rounded-full transition-all duration-500 shadow-lg ${
-              showSolid
-                ? "h-16 w-16 ring-4 ring-card/80"
-                : "h-16 w-16 ring-4 ring-white/30"
+        {/* Center logo (animated) */}
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-[60%] z-20" aria-label="קובה אליהו">
+          <div
+            className={`h-16 w-16 rounded-full overflow-hidden shadow-lg transform-gpu transition-all duration-500 ${
+              showSolid ? "ring-4 ring-card/80" : "ring-4 ring-white/30"
             }`}
-          />
+          >
+            <video
+              src="/videos/logo.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              aria-hidden="true"
+              className="h-full w-full scale-105 object-cover"
+            />
+          </div>
         </Link>
 
         {/* Left side (RTL) / Right side (LTR) - Contact icons + lang toggle */}
