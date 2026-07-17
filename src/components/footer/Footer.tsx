@@ -36,6 +36,15 @@ const Footer = () => {
               <Link to="/contact" className="block hover:text-primary-foreground transition-colors">{t.nav.contact}</Link>
               <Link to="/store-locations" className="block hover:text-primary-foreground transition-colors">{t.nav.storeLocations}</Link>
             </div>
+            <h4 className="font-serif text-lg font-semibold mb-4 mt-8">{t.footer.legalLinks}</h4>
+            <div className="space-y-2 text-sm text-primary-foreground/80">
+              <Link to="/accessibility-statement" className="block hover:text-primary-foreground transition-colors">
+                {t.footer.accessibilityStatement}
+              </Link>
+              <Link to="/privacy-policy" className="block hover:text-primary-foreground transition-colors">
+                {t.footer.privacyPolicy}
+              </Link>
+            </div>
           </div>
 
           {/* Contact */}

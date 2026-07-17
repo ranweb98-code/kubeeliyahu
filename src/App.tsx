@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import SplashScreen from "./components/SplashScreen";
 import PurchasePointsFab from "./components/PurchasePointsFab";
+import SkipToContent from "./components/SkipToContent";
+import AccessibilityWidget from "./components/AccessibilityWidget";
+import CookieConsent from "./components/CookieConsent";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import Index from "./pages/Index";
 import heroImage from "@/assets/kubbeh-1.jpg";
@@ -16,6 +19,8 @@ import Contact from "./pages/Contact";
 import StoreLocationsPage from "./pages/StoreLocationsPage";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AccessibilityStatement from "./pages/AccessibilityStatement";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,7 +54,10 @@ const App = () => {
         {contentVisible && (
           <BrowserRouter>
             <ScrollToTop />
+            <SkipToContent />
             <PurchasePointsFab />
+            <AccessibilityWidget />
+            <CookieConsent />
             <Routes>
               <Route path="/" element={<Index />} />
 
@@ -58,6 +66,8 @@ const App = () => {
               <Route path="/products/:slug" element={<ProductDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/store-locations" element={<StoreLocationsPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/accessibility-statement" element={<AccessibilityStatement />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

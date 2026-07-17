@@ -63,7 +63,7 @@ const Contact = () => {
     <div className="min-h-screen bg-background" dir={dir}>
       <Header />
 
-      <main className="pt-32 pb-12 px-6">
+      <main id="main-content" className="pt-32 pb-12 px-6" tabIndex={-1}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4">

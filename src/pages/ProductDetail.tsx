@@ -153,7 +153,7 @@ const ProductDetail = () => {
     <div className="min-h-screen bg-background" dir={dir}>
       <Header />
 
-      <main className="py-12 px-6">
+      <main id="main-content" className="py-12 px-6" tabIndex={-1}>
         <div className="max-w-5xl mx-auto">
           <AnimateOnScroll>
             <div className="mb-8 pt-16">

@@ -7,7 +7,7 @@ const StoreLocationsPage = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-32 pb-12 px-6">
+      <main id="main-content" className="pt-32 pb-12 px-6" tabIndex={-1}>
         <div className="max-w-6xl mx-auto">
           <StoreLocations />
         </div>

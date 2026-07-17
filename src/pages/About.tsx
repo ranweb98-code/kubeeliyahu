@@ -14,7 +14,7 @@ const About = () => {
     <div className="min-h-screen bg-background" dir={dir}>
       <Header />
       
-      <main className="pt-32 pb-12 px-6">
+      <main id="main-content" className="pt-32 pb-12 px-6" tabIndex={-1}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
