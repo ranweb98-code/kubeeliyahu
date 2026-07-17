@@ -77,7 +77,18 @@ const Navigation = () => {
         </button>
 
         {/* Center logo (animated) */}
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-[60%] z-20" aria-label="קובה אליהו">
+        <Link
+          to="/"
+          className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-[60%] z-20"
+          aria-label="קובה אליהו"
+          onClick={(e) => {
+            if (isHome) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setIsMobileMenuOpen(false);
+            }
+          }}
+        >
           <div
             className={`h-16 w-16 rounded-full overflow-hidden shadow-lg transform-gpu transition-all duration-500 ${
               showSolid ? "ring-4 ring-card/80" : "ring-4 ring-white/30"

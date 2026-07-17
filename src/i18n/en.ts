@@ -186,7 +186,6 @@ export const en: typeof he = {
     openLabel: "Accessibility menu",
     closeLabel: "Close accessibility menu",
     title: "Accessibility",
-    escHint: "ESC",
     increaseText: "Increase text",
     decreaseText: "Decrease text",
     highContrast: "High contrast",

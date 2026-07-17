@@ -186,7 +186,6 @@ export const he = {
     openLabel: "תפריט נגישות" as string,
     closeLabel: "סגירת תפריט נגישות" as string,
     title: "נגישות" as string,
-    escHint: "ESC" as string,
     increaseText: "הגדלת טקסט" as string,
     decreaseText: "הקטנת טקסט" as string,
     highContrast: "ניגודיות גבוהה" as string,

@@ -47,7 +47,7 @@ const CountUp = ({ target, suffix = "" }: { target: number; suffix?: string }) =
   );
 };
 
-const statTargets = [12, 80, 5000];
+const statTargets = [12, 120, 5000];
 
 const EditorialSection = () => {
   const { t, dir } = useLanguage();

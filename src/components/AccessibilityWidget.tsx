@@ -222,21 +222,16 @@ const AccessibilityWidget = () => {
         </div>
       )}
 
-      <div className="flex flex-col items-center gap-1">
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          aria-label={open ? w.closeLabel : w.openLabel}
-          aria-expanded={open}
-          aria-haspopup="dialog"
-        >
-          <Accessibility className="h-7 w-7" aria-hidden />
-        </button>
-        <span className="rounded bg-card/90 px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground shadow-sm">
-          {w.escHint}
-        </span>
-      </div>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        aria-label={open ? w.closeLabel : w.openLabel}
+        aria-expanded={open}
+        aria-haspopup="dialog"
+      >
+        <Accessibility className="h-7 w-7" aria-hidden />
+      </button>
     </div>
   );
 };
