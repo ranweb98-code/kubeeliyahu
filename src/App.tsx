@@ -10,6 +10,7 @@ import PurchasePointsFab from "./components/PurchasePointsFab";
 import SkipToContent from "./components/SkipToContent";
 import AccessibilityWidget from "./components/AccessibilityWidget";
 import CookieConsent from "./components/CookieConsent";
+import MetaPixel from "./components/MetaPixel";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import Index from "./pages/Index";
 import heroImage from "@/assets/kubbeh-1.jpg";
@@ -54,6 +55,7 @@ const App = () => {
         {contentVisible && (
           <BrowserRouter>
             <ScrollToTop />
+            <MetaPixel />
             <SkipToContent />
             <PurchasePointsFab />
             <AccessibilityWidget />

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
+import {
+  getCookieConsent,
+  setCookieConsent,
+  type ConsentValue,
+} from "@/lib/cookieConsent";
 
-const STORAGE_KEY = "kube-cookie-consent";
-
-type ConsentState = "unknown" | "accepted" | "declined";
+type ConsentState = "unknown" | ConsentValue;
 
 const CookieConsent = () => {
   const { t, dir } = useLanguage();
@@ -13,16 +16,12 @@ const CookieConsent = () => {
   const [manageOpen, setManageOpen] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === "accepted" || saved === "declined") {
-      setConsent(saved);
-    } else {
-      setConsent("unknown");
-    }
+    const saved = getCookieConsent();
+    setConsent(saved ?? "unknown");
   }, []);
 
-  const save = (value: Exclude<ConsentState, "unknown">) => {
-    localStorage.setItem(STORAGE_KEY, value);
+  const save = (value: ConsentValue) => {
+    setCookieConsent(value);
     setConsent(value);
     setManageOpen(false);
   };
